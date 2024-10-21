@@ -20,28 +20,19 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 public class CreateEditCharacter {
-    private TextFieldLine charName     = null;
-    private TextFieldLine charHP       = null;
-    private TextFieldLine charDefense  = null;
-    private TextFieldLine charATK      = null;
-    private TextFieldLine charMana     = null;
-    private TextFieldLine charMovement = null;
-    private TextFieldLine ab1Name      = null;
-    private TextFieldLine ab1Attack    = null;
-    private TextFieldLine ab1Mana      = null;
-    private TextFieldLine ab2Name      = null;
-    private TextFieldLine ab2Attack    = null;
-    private TextFieldLine ab2Mana      = null;
     private TransparentComboBox<String> charElements = null;
     private TransparentComboBox<String> charSpecies = null;
-    private SpeciesName currentSpecie = null;
-    private String currentImg = null;
-    private boolean melee = false;
-    private boolean distance = false;
-    private boolean state_switcher = false;
+    private boolean melee;
+    private boolean distance;
+    private boolean state_switcher;
+    private Element element;
+    private String specie;
+    private SpeciesName currentSpecie;
+    private String currentImg;
 
 
-    public CreateEditCharacter(JSONArray characters, List<Character> characterList,graphicInterface background, GetPos pos, int maxPlayers, Player player1, Player player2){
+    public CreateEditCharacter(JSONArray characters, List<Character> characterList,graphicInterface background, GetPos pos, int maxPlayers, Player player1, Player player2, JSONObject pastChar){
+
         background.setFilter(10, 200, 10, 100);
         Font font = new GameFont(90f).getFont();
         Font playerFont = new GameFont(35f).getFont();
@@ -100,6 +91,26 @@ public class CreateEditCharacter {
         TextFieldLine ab2Attack =    new TextFieldLine(playerFont, forSidePanels, ab2Panel, 10, 43, 80, 14, "Ability 2's attack");
         TextFieldLine ab2Mana =      new TextFieldLine(playerFont, forSidePanels, ab2Panel, 10, 71, 80, 14, "Ability 2's mana cost");
 
+        if(pastChar != null){
+            charName.setText(pastChar.getString("name"));
+            charHP.setText(String.valueOf(pastChar.getInt("health_status")));
+            charDefense.setText(String.valueOf(pastChar.getInt("defense_status")));
+            charATK.setText(String.valueOf(pastChar.getInt("attack_status")));
+            charMana.setText(String.valueOf(pastChar.getInt("manna_status")));
+            charMovement.setText(String.valueOf(pastChar.getInt("steps_per_turn")));
+
+            JSONObject ability1 = pastChar.getJSONObject("ability1");
+            JSONObject ability2 = pastChar.getJSONObject("ability2");
+
+            ab1Name.setText(ability1.getString("name"));
+            ab1Attack.setText(String.valueOf(ability1.getInt("damage")));
+            ab1Mana.setText(String.valueOf(ability1.getInt("manaCost")));
+
+            ab2Name.setText(ability2.getString("name"));
+            ab2Attack.setText(String.valueOf(ability2.getInt("damage")));
+            ab2Mana.setText(String.valueOf(ability2.getInt("manaCost")));
+        }
+
         TransparentComboBox<String> charElements = new TransparentComboBox<>(options);
         charElements.setBounds(forPanels.X(10), forPanels.Y(74), forPanels.X(90), forPanels.Y(7));
         charPanel.add(charElements);
@@ -118,6 +129,45 @@ public class CreateEditCharacter {
         speciesCharLine.setBounds(forPanels.X(10), forPanels.Y(92), forPanels.X(80), 5);
         charPanel.add(speciesCharLine);
 
+        if(pastChar != null){
+            charElements.setSelectedItem(pastChar.getString("element"));
+            if (element == Element.Fire) {
+                charSpecies.removeAllItems();
+                charSpecies.addItem("Charigator");
+                charSpecies.addItem("Fire Goblin");
+                charSpecies.addItem("Flame Cat");
+            } else {
+                if (element == Element.Water) {
+                    charSpecies.removeAllItems();
+                    charSpecies.addItem("Firefighter");
+                    charSpecies.addItem("Kraken Man");
+                    charSpecies.addItem("Fish Man");
+                } else {
+                    if (element == Element.Air) {
+                        charSpecies.removeAllItems();
+                        charSpecies.addItem("Katana Monkey");
+                        charSpecies.addItem("Air Ninja");
+                        charSpecies.addItem("Killer Rooster");
+                    } else {
+                        if (element == Element.Earth) {
+                            charSpecies.removeAllItems();
+                            charSpecies.addItem("Attack Gorila");
+                            charSpecies.addItem("Crazy Sloth");
+                            charSpecies.addItem("Mud Monster");
+                        } else {
+                            if (element == Element.Magic) {
+                                charSpecies.removeAllItems();
+                                charSpecies.addItem("Wizard");
+                                charSpecies.addItem("Dobbie");
+                                charSpecies.addItem("Rainbowcorn");
+                            }
+                        }
+                    }
+                }
+            }
+            charSpecies.setSelectedItem(pastChar.getString("specie"));
+        }
+
         RoundedButton back = new RoundedButton("BACK", 30, 50f, Color.decode("#181818"));
         back.setBounds(pos.X(29), pos.Y(85), pos.X(20), pos.Y(10));
         background.add(back);
@@ -135,7 +185,9 @@ public class CreateEditCharacter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String preElement = charElements.getSelectedItem().toString();
-                Element element = Element.valueOf(preElement);
+                element = Element.valueOf(preElement);
+
+
                 System.out.println(element);
                 if (element == Element.Fire) {
                     charSpecies.removeAllItems();
@@ -171,74 +223,118 @@ public class CreateEditCharacter {
                         }
                     }
                 }
+                specie = charSpecies.getSelectedItem().toString();
+                getSpecie();
             }
         });
 
         RoundedButton next = new RoundedButton("NEXT", 30, 50f, Color.decode("#181818"));
         next.setBounds(pos.X(51), pos.Y(85), pos.X(20), pos.Y(10));
         background.add(next);
+
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCharacter(characters,
+                        characterList,
+                        pastChar,
+                        charName.getText(),
+                        Integer.parseInt(charHP.getText()),
+                        Integer.parseInt(charDefense.getText()),
+                        Integer.parseInt(charATK.getText()),
+                        Integer.parseInt(charMana.getText()),
+                        Integer.parseInt(charMovement.getText()),
+                        ab1Name.getText(),
+                        Integer.parseInt(ab1Attack.getText()),
+                        Integer.parseInt(ab1Mana.getText()),
+                        ab2Name.getText(),
+                        Integer.parseInt(ab2Attack.getText()),
+                        Integer.parseInt(ab2Mana.getText()));
+            }
+        });
     }
 
-    private void updateCharacter(JSONArray characters, List<Character> characterList, JSONObject pastChar){
-        String preElement = charElements.getSelectedItem().toString();
-        Element element = Element.valueOf(preElement);
-        getSpecie();
+    private void updateCharacter(JSONArray characters, List<Character> characterList, JSONObject pastChar, String charName, int charHP, int charDefense, int charATK, int charMana, int charMovement, String ab1Name, int ab1Attack, int ab1Mana, String ab2Name, int ab2Attack, int ab2Mana){
+        if(currentImg == null || currentSpecie == null){
 
-        Ability abilityt1 = new Ability(
-                ab1Name.getText().toString(),
-                Integer.parseInt(ab1Attack.getText()),
-                Integer.parseInt(ab1Mana.getText()),
-                melee,
-                distance,
-                state_switcher
-        );
+        } else {
 
-        Ability ability2 = new Ability(
-                ab2Name.getText().toString(),
-                Integer.parseInt(ab2Attack.getText()),
-                Integer.parseInt(ab2Mana.getText()),
-                melee,
-                distance,
-                state_switcher
-        );
+            Ability ability1 = new Ability(
+                    ab1Name,
+                    ab1Attack,
+                    ab1Mana,
+                    melee,
+                    distance,
+                    state_switcher
+            );
 
-        //Character currentChar = new Character();
+            Ability ability2 = new Ability(
+                    ab2Name,
+                    ab2Attack,
+                    ab2Mana,
+                    melee,
+                    distance,
+                    state_switcher
+            );
+
+            Character currentChar = new Character(
+                    charName,
+                    element,
+                    ability1,
+                    ability2,
+                    0,
+                    0,
+                    0,
+                    charHP,
+                    charATK,
+                    charMana,
+                    charDefense,
+                    charMovement,
+                    currentSpecie,
+                    currentImg
+            );
+
+            saveCharacterToJson(pastChar, currentChar);
+        }
     }
 
     private void saveCharacterToJson(JSONObject pastCharacter, Character editedCharacter) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        File file = new File("Characters.json");
+        File file = new File("src\\Characters.json");
         List<Character> characterList = new ArrayList<Character>();
 
-        // Load existing characters from JSON
+        // Cargar personajes existentes desde JSON
         try {
             if (file.exists()) {
-                Reader reader = new FileReader(file);
-                Type characterListType = new TypeToken<List<Character>>() {}.getType();
-                characterList = gson.fromJson(reader, characterListType);
-                reader.close();
-            } else {
-                characterList = new ArrayList<>(); // Initialize if file does not exist
+                try (Reader reader = new FileReader(file)) { // Use try-with-resources to ensure the reader is closed
+                    Type characterListType = new TypeToken<List<Character>>() {}.getType();
+                    characterList = gson.fromJson(reader, characterListType);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < characterList.size(); i++) {
-            Character existingCharacter = characterList.get(i);
-            if (existingCharacter.get_name().equals(pastCharacter.getString("name"))) { // Replace based on name
-                characterList.set(i, editedCharacter); // Replace the existing character
-                break;
-            } else {
-                characterList.add(editedCharacter);
+        boolean characterFoundAndReplaced = false;
+        if (pastCharacter != null) {
+            String pastCharacterName = pastCharacter.getString("name");
+            for (int i = 0; i < characterList.size(); i++) {
+                Character existingCharacter = characterList.get(i);
+                if (existingCharacter.get_name().equals(pastCharacterName)) {
+                    characterList.set(i, editedCharacter); // Reemplaza el personaje existente
+                    characterFoundAndReplaced = true;
+                    break;
+                }
             }
         }
 
-        // Save back to the JSON file
-        try {
-            Writer writer = new FileWriter(file);
+        if (!characterFoundAndReplaced) { // Si pastCharacter es null o no se encontró el personaje
+            characterList.add(editedCharacter); // Añadir como un nuevo personaje
+        }
+
+        // Guardar de nuevo al archivo JSON
+        try (Writer writer = new FileWriter(file)) { // Use try-with-resources to ensure the writer is closed
             gson.toJson(characterList, writer);
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -246,11 +342,9 @@ public class CreateEditCharacter {
         System.out.println("Character saved successfully!");
     }
 
-    private void getSpecie() {
-        // Get the selected species from the dropdown
-        String selectedSpecie = (String) charSpecies.getSelectedItem();
 
-        switch (selectedSpecie) {
+    private void getSpecie() {
+        switch (specie) {
             case "Charigator":
                 currentSpecie = SpeciesName.CHARIGATOR;
                 currentImg = "src\\images\\fire\\charigator1.png";

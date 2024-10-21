@@ -122,7 +122,7 @@ public class CharSelection {
         }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        File file = new File("C:\\Users\\Kenneth\\IdeaProjects\\Tec of legends\\src\\Characters.json");
+        File file = new File("src\\Characters.json");
 
         // Load existing characters from JSON
         try {
@@ -177,7 +177,17 @@ public class CharSelection {
                 background.removeAll();  // Eliminar todos los componentes del panel
                 background.revalidate(); // Actualizar el diseño del panel
                 background.repaint();
-                new CreateEditCharacter(characters, characterList, background, pos, maxCharacters, player1, player2);
+                new CreateEditCharacter(characters, characterList, background, pos, maxCharacters, player1, player2, null);
+            }
+        });
+
+        editChar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                background.removeAll();  // Eliminar todos los componentes del panel
+                background.revalidate(); // Actualizar el diseño del panel
+                background.repaint();
+                new CreateEditCharacter(characters, characterList, background, pos, maxCharacters, player1, player2, selected);
             }
         });
 
@@ -287,7 +297,7 @@ public class CharSelection {
 
     private void deleteCharacterFromJson(String characterName, RoundedPanel container) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        File file = new File("C:\\Users\\Kenneth\\IdeaProjects\\Tec of legends\\src\\Characters.json");
+        File file = new File("src\\Characters.json");
 
         List charactersList = new ArrayList();
 
@@ -342,7 +352,7 @@ public class CharSelection {
         characters = new JSONArray(jsonContent.toString());
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        File file = new File("C:\\Users\\Kenneth\\IdeaProjects\\Tec of legends\\src\\Characters.json");
+        File file = new File("src\\Characters.json");
 
         // Load existing characters from JSON
         try {

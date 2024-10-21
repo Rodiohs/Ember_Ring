@@ -7,7 +7,7 @@ import java.io.IOException;
 public class testing {
     public static void main(String[] args) {
         // Ruta al archivo JSON (ajusta la ruta según la ubicación de tu archivo)
-        String filePath = "src/Characters.json";
+        String filePath = "src\\Characters.json";
 
         // Leer el archivo y convertirlo en un String
         StringBuilder jsonContent = new StringBuilder();
