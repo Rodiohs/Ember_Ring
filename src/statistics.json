@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "Rafa",
+      "matchesPlayed": 12,
+      "matchesWon": 5,
+      "matchesLost": 3,
+      "totalCharacterDeaths": 30,
+      "totalTowerDeaths": 7,
+      "totalCharacterDeathsUsed": 45,
+      "totalDeaths": 75
+    },
+    {
+      "name": "Kenneth",
+      "matchesPlayed": 3,
+      "matchesWon": 1,
+      "matchesLost": 10,
+      "totalCharacterDeaths": 25,
+      "totalTowerDeaths": 3,
+      "totalCharacterDeathsUsed": 35,
+      "totalDeaths": 58
+    }
+  ]
+}

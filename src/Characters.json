@@ -1,0 +1,290 @@
+[
+  {
+    "img": "src\\images\\magic\\dobi1.png",
+    "ability1": {
+      "name": "Patada de dobbie",
+      "damage": 1,
+      "manaCost": 10,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Vomito dobbie",
+      "damage": 1,
+      "manaCost": 20,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "specie": "DOBI",
+    "maxHP": 150,
+    "maxMana": 100,
+    "name": "Rafael Odio",
+    "element": "MAGIC",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 150,
+    "attack_status": 5,
+    "manna_status": 100,
+    "defense_status": 150,
+    "steps_per_turn": 4
+  },
+  {
+    "img": "src\\images\\magic\\wizard1.png",
+    "ability1": {
+      "name": "Hechizo rayo",
+      "damage": 100,
+      "manaCost": 10,
+      "melee": false,
+      "distance": false,
+      "state_switcher": true
+    },
+    "ability2": {
+      "name": "Golpe de magia",
+      "damage": 50,
+      "manaCost": 5,
+      "melee": false,
+      "distance": false,
+      "state_switcher": true
+    },
+    "specie": "WIZARD",
+    "maxHP": 200,
+    "maxMana": 100,
+    "name": "El hechicero",
+    "element": "MAGIC",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 200,
+    "attack_status": 100,
+    "manna_status": 100,
+    "defense_status": 100,
+    "steps_per_turn": 2
+  },
+  {
+    "img": "src\\images\\magic\\rainbowcorn1.png",
+    "ability1": {
+      "name": "Cuernazo mágico",
+      "damage": 100,
+      "manaCost": 10,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Rayo arcoirís",
+      "damage": 50,
+      "manaCost": 5,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "specie": "RAINBOWCORN",
+    "maxHP": 400,
+    "maxMana": 100,
+    "name": "Rainbow Dash",
+    "element": "MAGIC",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 400,
+    "attack_status": 100,
+    "manna_status": 100,
+    "defense_status": 100,
+    "steps_per_turn": 1
+  },
+  {
+    "img": "src\\images\\dirt\\crazySloth1.png",
+    "ability1": {
+      "name": "Garras",
+      "damage": 200,
+      "manaCost": 15,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Mordisco",
+      "damage": 100,
+      "manaCost": 10,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "specie": "CRAZY_SLOTH",
+    "maxHP": 100,
+    "maxMana": 100,
+    "name": "Sid",
+    "element": "EARTH",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 100,
+    "attack_status": 45,
+    "manna_status": 100,
+    "defense_status": 100,
+    "steps_per_turn": 2
+  },
+  {
+    "img": "src\\images\\fire\\charigator1.png",
+    "ability1": {
+      "name": "Vuelo",
+      "damage": 50,
+      "manaCost": 4,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Ascuas",
+      "damage": 200,
+      "manaCost": 10,
+      "melee": true,
+      "distance": false,
+      "state_switcher": false
+    },
+    "specie": "CHARIGATOR",
+    "maxHP": 200,
+    "maxMana": 100,
+    "name": "La lagartija cósmica",
+    "element": "FIRE",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 200,
+    "attack_status": 100,
+    "manna_status": 100,
+    "defense_status": 50,
+    "steps_per_turn": 1
+  },
+  {
+    "img": "src\\images\\water\\firefighter1.png",
+    "ability1": {
+      "name": "Mordida de saguate",
+      "damage": 100,
+      "manaCost": 5,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Mangueraso",
+      "damage": 180,
+      "manaCost": 10,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "specie": "FIREFIGHTER",
+    "maxHP": 200,
+    "maxMana": 100,
+    "name": "El dalmata 102",
+    "element": "WATER",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 200,
+    "attack_status": 200,
+    "manna_status": 100,
+    "defense_status": 10,
+    "steps_per_turn": 2
+  },
+  {
+    "img": "src\\images\\air\\killerRooster1.png",
+    "ability1": {
+      "name": "Aleteo tornado",
+      "damage": 50,
+      "manaCost": 10,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Locura de gallo",
+      "damage": 30,
+      "manaCost": 5,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "specie": "KILLER_ROOSTER",
+    "maxHP": 50,
+    "maxMana": 5,
+    "name": "Rooster",
+    "element": "AIR",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 50,
+    "attack_status": 500,
+    "manna_status": 5,
+    "defense_status": 0,
+    "steps_per_turn": 3
+  },
+  {
+    "img": "src\\images\\fire\\fireGoblin1.png",
+    "ability1": {
+      "name": "Golpe con fuego",
+      "damage": 100,
+      "manaCost": 10,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "ability2": {
+      "name": "Ataque de duende",
+      "damage": 50,
+      "manaCost": 5,
+      "melee": false,
+      "distance": true,
+      "state_switcher": false
+    },
+    "specie": "FIRE_GOBLIN",
+    "maxHP": 100,
+    "maxMana": 100,
+    "name": "El duende no verde",
+    "element": "FIRE",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 100,
+    "attack_status": 100,
+    "manna_status": 100,
+    "defense_status": 100,
+    "steps_per_turn": 2
+  },
+  {
+    "img": "src\\images\\magic\\wizard1.png",
+    "ability1": {
+      "name": "Hechizo rayo",
+      "damage": 100,
+      "manaCost": 10,
+      "melee": false,
+      "distance": false,
+      "state_switcher": true
+    },
+    "ability2": {
+      "name": "Golpe de magia",
+      "damage": 50,
+      "manaCost": 5,
+      "melee": false,
+      "distance": false,
+      "state_switcher": true
+    },
+    "specie": "WIZARD",
+    "maxHP": 200,
+    "maxMana": 100,
+    "name": "El hechicero",
+    "element": "MAGIC",
+    "pos_x": 0,
+    "pos_y": 0,
+    "level_status": 1,
+    "health_status": 200,
+    "attack_status": 100,
+    "manna_status": 100,
+    "defense_status": 100,
+    "steps_per_turn": 2
+  }
+]
